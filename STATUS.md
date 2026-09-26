@@ -9,12 +9,12 @@ _Last updated: 2026-09-26_
 | Simulator, 8 tools, fault injector, harness, SQLite checkpoints, budgets | implemented, locally tested (28 tests) |
 | Scenario suite (156 scenarios, 9 families, structure/entity-disjoint splits) | generated, `data/suite` (sha256 in manifest) |
 | Three-config comparison with the **scripted reference policy** | run: smoke (20), full (156×3 seeds), test (51×3 seeds) |
-| Refinement loop (catalog proposer, ≤3 candidates) | run: 2 candidates, 0 accepted (negative result) |
+| Refinement loop (catalog proposer, ≤3 candidates) | mechanics run: 2 candidates, 0 accepted. Not an informative improvement test (scripted policy ignores prompts); **real-LLM refinement unevaluated** |
 | Real-model evaluation (Qwen3-0.6B or other) | **not run**: huggingface.co is blocked from this build environment |
 | Gradio viewer | implemented, rendered locally (`docs/viewer.png`) |
 | HF Space `PranjulGupta/agent-reliability-lab` | **not published**: no Hub write access from this environment (bundle is ready in `space/`) |
 | GitHub | pushed to branch `claude/funny-hamilton-sub741` (CI green at `4b8cef2`); `main` still holds only the initial commit |
-| Companion project `toolroute-06b` | built and committed locally; repo creation was not permitted from this session |
+| Companion project | https://github.com/Pranjulcr7/toolroute-06b (depends on commit `4b8cef2` of this repo) |
 
 ## Decisions
 
@@ -43,7 +43,7 @@ arlab bundle --traces results/full-reference/traces --out space/traces.json.gz
    - allow `huggingface.co` (and `cdn-lfs*.huggingface.co` / `*.hf.co`) in this cloud environment's network
      settings, then run `arlab run --split smoke --model "transformers:Qwen/Qwen3-0.6B@<sha>" --max-total-requests 600`
      on CPU; or
-   - run `notebooks/real_model_smoke.ipynb` on Colab. It installs from `main`, so merge the branch first.
+   - run `notebooks/real_model_smoke.ipynb` on Colab. It installs and checks out the exact commit `4b8cef2`.
 2. If the real model shows prompt-sensitive failures, rerun `arlab refine --model ...`. The refinement loop only
    means something with a model that reads instructions.
 3. Publish the replay Space (free CPU, static replay) from a machine with Hub write access:

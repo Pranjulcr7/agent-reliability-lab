@@ -59,7 +59,7 @@ suite hash are in `data/suite/manifest.json`.
 | baseline | 0.451 (0.37–0.53) | 1.00 (n=9) | 0.20 (n=90) | 45 | 14 / 0 | 14.4 |
 | validated | 0.804 (0.73–0.86) | 1.00 (n=9) | 0.70 (n=90) | 27 | 14 / 0 | 11.9 |
 | recoverable | 0.980 (0.94–0.99) | 1.00 (n=9) | 1.00 (n=90) | 0 | 14 / 0 | 10.9 |
-| recoverable-frozen (after refinement) | 0.980 (0.94–0.99) | 1.00 (n=9) | 1.00 (n=90) | 0 | 14 / 0 | 10.9 |
+| recoverable-frozen (after refinement loop; identical config) | 0.980 (0.94–0.99) | 1.00 (n=9) | 1.00 (n=90) | 0 | 14 / 0 | 10.9 |
 
 ![success by family and config](results/full-reference/comparison.png)
 
@@ -75,10 +75,11 @@ What the comparison shows, and what it does not:
   the grant scope. That variant fails in 13 of 27 episodes in every config (see
   [engineering notes](docs/engineering-notes.md#three-failure-cases-all-replayable-in-the-trace-viewer)).
 - **No clean-task regression** in this setup (1.00 everywhere), but n is small (9 on test, 36 across all splits).
-- **Refinement: negative result.** The bounded loop (dev failures → ≤3 allowlisted prompt/tool-description edits →
-  accept only if validation improves with no safety regression) proposed 2 candidates and accepted neither. The base
-  config already scored 1.0 on validation, and the scripted policy ignores prompt text. The frozen config is
-  therefore identical to `recoverable` (`results/refine/refine_log.json`).
+- **Refinement: mechanics verified, improvement not evaluated.** The bounded loop (dev failures → ≤3 allowlisted
+  prompt/tool-description edits → accept only if validation improves with no safety regression) ran end to end:
+  it proposed 2 candidates and accepted neither (`results/refine/refine_log.json`). This is **not** evidence about
+  whether refinement helps. The scripted policy ignores prompt text, and the base config already scored 1.0 on
+  validation, so no candidate could change the score. Refinement with a real LLM has not been evaluated.
 - Latency figures (p50/p95 in `summary.csv`) are **simulated** tool time and are not a performance claim.
   Token counts are character-based estimates for the scripted policy.
 
