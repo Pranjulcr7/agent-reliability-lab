@@ -13,7 +13,8 @@ _Last updated: 2026-09-26_
 | Real-model evaluation (Qwen3-0.6B or other) | **not run**: huggingface.co is blocked from this build environment |
 | Gradio viewer | implemented, rendered locally (`docs/viewer.png`) |
 | HF Space `PranjulGupta/agent-reliability-lab` | **not published**: no Hub write access from this environment (bundle is ready in `space/`) |
-| GitHub | pushed to branch `claude/funny-hamilton-sub741`; `main` still holds only the initial commit |
+| GitHub | pushed to branch `claude/funny-hamilton-sub741` (CI green at `4b8cef2`); `main` still holds only the initial commit |
+| Companion project `toolroute-06b` | built and committed locally; repo creation was not permitted from this session |
 
 ## Decisions
 
@@ -45,5 +46,12 @@ arlab bundle --traces results/full-reference/traces --out space/traces.json.gz
    - run `notebooks/real_model_smoke.ipynb` on Colab. It installs from `main`, so merge the branch first.
 2. If the real model shows prompt-sensitive failures, rerun `arlab refine --model ...`. The refinement loop only
    means something with a model that reads instructions.
-3. Publish the Space from `space/` (see the command in the final handoff) after pinning `COMMIT_SHA` in
-   `space/requirements.txt`.
+3. Publish the replay Space (free CPU, static replay) from a machine with Hub write access:
+   ```python
+   from huggingface_hub import HfApi
+   api = HfApi()
+   api.create_repo("PranjulGupta/agent-reliability-lab", repo_type="space", space_sdk="gradio")
+   api.upload_folder(folder_path="space", repo_id="PranjulGupta/agent-reliability-lab", repo_type="space")
+   ```
+   `space/requirements.txt` pins the package to commit `4b8cef2`. If the branch is squash-merged and then deleted,
+   re-pin it to the merge commit on `main`.
