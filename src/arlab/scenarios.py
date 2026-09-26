@@ -114,12 +114,14 @@ def _service(name: str, rng: random.Random) -> dict[str, Any]:
     }
 
 
-def build(structure: tuple[str, str, str], instance: int, base_seed: int = 0) -> dict[str, Any]:
+def build(structure: tuple[str, str, str], instance: int, base_seed: int = 0,
+          pools: dict[str, list[str]] | None = None, split: str | None = None) -> dict[str, Any]:
+    """Build one scenario. `pools`/`split` let downstream projects reuse the world builder with their own entities."""
     fam, inc, variant = structure
-    split = split_of(structure)
+    split = split or split_of(structure)
     seed = int(hashlib.sha256(f"{base_seed}:{fam}:{inc}:{variant}:{instance}".encode()).hexdigest()[:8], 16)
     rng = random.Random(seed)
-    names = rng.sample(POOLS[split], rng.randint(3, 5))
+    names = rng.sample((pools or POOLS)[split], rng.randint(3, 5))
     target, other = names[0], names[1]
     services = {n: _service(n, rng) for n in names}
     svc = services[target]
