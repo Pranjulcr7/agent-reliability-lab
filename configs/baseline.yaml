@@ -1,0 +1,10 @@
+# Config A: minimal runtime protections, bounded execution only.
+name: baseline
+validate: false
+max_retries: 0
+idempotency: false
+checkpoint: false
+loop_guard: false
+label_untrusted: false
+max_steps: 20
+max_wall_ms: 120000
