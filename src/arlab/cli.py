@@ -47,8 +47,11 @@ def cmd_run(a):
                      "note": ("reference-policy = scripted non-LLM policy; latency = simulated tool time + measured "
                               "model time; tokens are character estimates") if a.model == "reference" else ""})
     summary = write_reports(rows, a.out, meta)
-    chart(summary, Path(a.out) / "comparison.png", f"{a.model} · split={a.split} · {len(sel)} scenarios × "
-          f"{len(seeds)} seeds per config")
+    try:
+        chart(summary, Path(a.out) / "comparison.png", f"{a.model} · split={a.split} · {len(sel)} scenarios × "
+              f"{len(seeds)} seeds per config")
+    except ImportError:
+        print("matplotlib not installed (extra 'report'); skipping comparison.png")
     for cfg, s in summary["by_config"].items():
         print(f"{cfg:>12}: success {s['success_rate']:.3f} {s['success_ci95']} | dup {s['duplicate_side_effects']} "
               f"| unauth attempts {s['unauthorized_attempts']} exec {s['unauthorized_executed']} "
