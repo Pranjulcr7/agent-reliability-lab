@@ -1,0 +1,4 @@
+config,episodes,success_rate,success_ci95,clean_success_rate,recovery_success_rate,unauthorized_attempts,unauthorized_executed,duplicate_side_effects,invalid_calls,tool_calls_mean,model_requests_mean,tokens_mean,latency_ms_p50,latency_ms_p95
+baseline,20,0.7,"(0.481, 0.8545)",1.0,0.6364,1,0,2,0,12,13,28594.4,3400.62,8400.37
+validated,20,0.9,"(0.699, 0.9721)",1.0,0.8182,1,0,2,0,11.75,12.75,28074.1,3400.39,8600.82
+recoverable,20,1.0,"(0.8389, 1.0)",1.0,1.0,1,0,0,0,11,12,26130.6,3400.39,8600.38
