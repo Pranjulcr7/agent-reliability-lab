@@ -1,0 +1,410 @@
+{
+ "meta": {
+  "arlab_version": "0.1.0",
+  "git_commit": "3b059935cfbad65dc21d690b7b88a4f52cc6c78a",
+  "python": "3.11.15",
+  "utc": "2026-09-26T20:33:13+00:00",
+  "argv": [
+   "run",
+   "--split",
+   "all",
+   "--seeds",
+   "0,1,2",
+   "--out",
+   "results/full-reference"
+  ],
+  "model": "reference",
+  "split": "all",
+  "suite_sha256": "e4fee5b89c23390e163e2d17aa2d207a72a57ee9b92a9e4aca7d3840ed4ca1a3",
+  "n_scenarios": 156,
+  "seeds": [
+   0,
+   1,
+   2
+  ],
+  "configs": [
+   {
+    "name": "baseline",
+    "validate": false,
+    "max_retries": 0,
+    "backoff_ms": 200,
+    "idempotency": false,
+    "checkpoint": false,
+    "loop_guard": false,
+    "label_untrusted": false,
+    "max_steps": 20,
+    "max_tool_calls": null,
+    "max_model_requests": null,
+    "max_tokens": null,
+    "max_wall_ms": 120000,
+    "max_staleness_ms": 1000,
+    "max_restarts": 1,
+    "loop_warn_after": 3,
+    "loop_stop_after": 5,
+    "instructions": "",
+    "tool_descriptions": {}
+   },
+   {
+    "name": "validated",
+    "validate": true,
+    "max_retries": 2,
+    "backoff_ms": 200,
+    "idempotency": false,
+    "checkpoint": false,
+    "loop_guard": true,
+    "label_untrusted": true,
+    "max_steps": 20,
+    "max_tool_calls": 30,
+    "max_model_requests": 25,
+    "max_tokens": 150000,
+    "max_wall_ms": 120000,
+    "max_staleness_ms": 1000,
+    "max_restarts": 1,
+    "loop_warn_after": 3,
+    "loop_stop_after": 5,
+    "instructions": "",
+    "tool_descriptions": {}
+   },
+   {
+    "name": "recoverable",
+    "validate": true,
+    "max_retries": 2,
+    "backoff_ms": 200,
+    "idempotency": true,
+    "checkpoint": true,
+    "loop_guard": true,
+    "label_untrusted": true,
+    "max_steps": 20,
+    "max_tool_calls": 30,
+    "max_model_requests": 25,
+    "max_tokens": 150000,
+    "max_wall_ms": 120000,
+    "max_staleness_ms": 1000,
+    "max_restarts": 1,
+    "loop_warn_after": 3,
+    "loop_stop_after": 5,
+    "instructions": "",
+    "tool_descriptions": {}
+   }
+  ],
+  "note": "reference-policy = scripted non-LLM policy; latency = simulated tool time + measured model time; tokens are character estimates"
+ },
+ "by_config": {
+  "baseline": {
+   "episodes": 468,
+   "scenarios": 156,
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "success_rate": 0.5876,
+   "success_ci95": [
+    0.5425,
+    0.6313
+   ],
+   "clean_success_rate": 1.0,
+   "clean_n": 36,
+   "recovery_success_rate": 0.4333,
+   "faulted_n": 270,
+   "unauthorized_attempts": 29,
+   "unauthorized_executed": 0,
+   "duplicate_side_effects": 72,
+   "episodes_with_duplicates": 72,
+   "invalid_calls": 0,
+   "tool_calls_mean": 12.87,
+   "model_requests_mean": 13.87,
+   "tokens_mean": 31074.3,
+   "latency_ms_p50": 3401.03,
+   "latency_ms_p95": 8401.09,
+   "stop_reasons": {
+    "final_answer": 387,
+    "max_steps": 81
+   },
+   "families": {
+    "clean": {
+     "n": 36,
+     "success_rate": 1.0,
+     "ci95": [
+      0.9036,
+      1.0
+     ]
+    },
+    "transient_read": {
+     "n": 54,
+     "success_rate": 0.5,
+     "ci95": [
+      0.3711,
+      0.6289
+     ]
+    },
+    "ambiguous_write": {
+     "n": 81,
+     "success_rate": 0.6667,
+     "ci95": [
+      0.5585,
+      0.7597
+     ]
+    },
+    "duplicate_delivery": {
+     "n": 27,
+     "success_rate": 0.0,
+     "ci95": [
+      0.0,
+      0.1246
+     ]
+    },
+    "corrupted_observation": {
+     "n": 54,
+     "success_rate": 0.1667,
+     "ci95": [
+      0.0902,
+      0.2874
+     ]
+    },
+    "injection": {
+     "n": 81,
+     "success_rate": 0.8395,
+     "ci95": [
+      0.7445,
+      0.9037
+     ]
+    },
+    "unauthorized_request": {
+     "n": 54,
+     "success_rate": 1.0,
+     "ci95": [
+      0.9336,
+      1.0
+     ]
+    },
+    "crash_resume": {
+     "n": 54,
+     "success_rate": 0.5,
+     "ci95": [
+      0.3711,
+      0.6289
+     ]
+    },
+    "flapping": {
+     "n": 27,
+     "success_rate": 0.0,
+     "ci95": [
+      0.0,
+      0.1246
+     ]
+    }
+   }
+  },
+  "validated": {
+   "episodes": 468,
+   "scenarios": 156,
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "success_rate": 0.8568,
+   "success_ci95": [
+    0.8222,
+    0.8857
+   ],
+   "clean_success_rate": 1.0,
+   "clean_n": 36,
+   "recovery_success_rate": 0.8,
+   "faulted_n": 270,
+   "unauthorized_attempts": 29,
+   "unauthorized_executed": 0,
+   "duplicate_side_effects": 45,
+   "episodes_with_duplicates": 45,
+   "invalid_calls": 0,
+   "tool_calls_mean": 11.66,
+   "model_requests_mean": 12.66,
+   "tokens_mean": 27671.5,
+   "latency_ms_p50": 3550.81,
+   "latency_ms_p95": 8600.4,
+   "stop_reasons": {
+    "final_answer": 468
+   },
+   "families": {
+    "clean": {
+     "n": 36,
+     "success_rate": 1.0,
+     "ci95": [
+      0.9036,
+      1.0
+     ]
+    },
+    "transient_read": {
+     "n": 54,
+     "success_rate": 1.0,
+     "ci95": [
+      0.9336,
+      1.0
+     ]
+    },
+    "ambiguous_write": {
+     "n": 81,
+     "success_rate": 1.0,
+     "ci95": [
+      0.9547,
+      1.0
+     ]
+    },
+    "duplicate_delivery": {
+     "n": 27,
+     "success_rate": 0.0,
+     "ci95": [
+      0.0,
+      0.1246
+     ]
+    },
+    "corrupted_observation": {
+     "n": 54,
+     "success_rate": 1.0,
+     "ci95": [
+      0.9336,
+      1.0
+     ]
+    },
+    "injection": {
+     "n": 81,
+     "success_rate": 0.8395,
+     "ci95": [
+      0.7445,
+      0.9037
+     ]
+    },
+    "unauthorized_request": {
+     "n": 54,
+     "success_rate": 1.0,
+     "ci95": [
+      0.9336,
+      1.0
+     ]
+    },
+    "crash_resume": {
+     "n": 54,
+     "success_rate": 0.5,
+     "ci95": [
+      0.3711,
+      0.6289
+     ]
+    },
+    "flapping": {
+     "n": 27,
+     "success_rate": 1.0,
+     "ci95": [
+      0.8754,
+      1.0
+     ]
+    }
+   }
+  },
+  "recoverable": {
+   "episodes": 468,
+   "scenarios": 156,
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "success_rate": 0.9722,
+   "success_ci95": [
+    0.9531,
+    0.9837
+   ],
+   "clean_success_rate": 1.0,
+   "clean_n": 36,
+   "recovery_success_rate": 1.0,
+   "faulted_n": 270,
+   "unauthorized_attempts": 29,
+   "unauthorized_executed": 0,
+   "duplicate_side_effects": 0,
+   "episodes_with_duplicates": 0,
+   "invalid_calls": 0,
+   "tool_calls_mean": 10.84,
+   "model_requests_mean": 11.84,
+   "tokens_mean": 25682.6,
+   "latency_ms_p50": 3400.44,
+   "latency_ms_p95": 8600.38,
+   "stop_reasons": {
+    "final_answer": 468
+   },
+   "families": {
+    "clean": {
+     "n": 36,
+     "success_rate": 1.0,
+     "ci95": [
+      0.9036,
+      1.0
+     ]
+    },
+    "transient_read": {
+     "n": 54,
+     "success_rate": 1.0,
+     "ci95": [
+      0.9336,
+      1.0
+     ]
+    },
+    "ambiguous_write": {
+     "n": 81,
+     "success_rate": 1.0,
+     "ci95": [
+      0.9547,
+      1.0
+     ]
+    },
+    "duplicate_delivery": {
+     "n": 27,
+     "success_rate": 1.0,
+     "ci95": [
+      0.8754,
+      1.0
+     ]
+    },
+    "corrupted_observation": {
+     "n": 54,
+     "success_rate": 1.0,
+     "ci95": [
+      0.9336,
+      1.0
+     ]
+    },
+    "injection": {
+     "n": 81,
+     "success_rate": 0.8395,
+     "ci95": [
+      0.7445,
+      0.9037
+     ]
+    },
+    "unauthorized_request": {
+     "n": 54,
+     "success_rate": 1.0,
+     "ci95": [
+      0.9336,
+      1.0
+     ]
+    },
+    "crash_resume": {
+     "n": 54,
+     "success_rate": 1.0,
+     "ci95": [
+      0.9336,
+      1.0
+     ]
+    },
+    "flapping": {
+     "n": 27,
+     "success_rate": 1.0,
+     "ci95": [
+      0.8754,
+      1.0
+     ]
+    }
+   }
+  }
+ }
+}
