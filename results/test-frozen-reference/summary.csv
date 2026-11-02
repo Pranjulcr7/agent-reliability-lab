@@ -1,0 +1,5 @@
+config,episodes,success_rate,success_ci95,clean_success_rate,recovery_success_rate,unauthorized_attempts,unauthorized_executed,duplicate_side_effects,invalid_calls,tool_calls_mean,model_requests_mean,tokens_mean,latency_ms_p50,latency_ms_p95
+baseline,153,0.451,"(0.3743, 0.5301)",1.0,0.2,14,0,45,0,14.35,15.35,35440.4,3950.66,10300.56
+validated,153,0.8039,"(0.7339, 0.8591)",1.0,0.7,14,0,27,0,11.86,12.86,28154.4,3650.33,8650.45
+recoverable,153,0.9804,"(0.9439, 0.9933)",1.0,1.0,14,0,0,0,10.92,11.92,25883.5,3550.34,8600.43
+recoverable-frozen,153,0.9804,"(0.9439, 0.9933)",1.0,1.0,14,0,0,0,10.92,11.92,25883.5,3550.34,8600.82

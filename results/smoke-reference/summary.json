@@ -1,0 +1,402 @@
+{
+ "meta": {
+  "arlab_version": "0.1.0",
+  "git_commit": "3b059935cfbad65dc21d690b7b88a4f52cc6c78a",
+  "python": "3.11.15",
+  "utc": "2026-09-26T20:30:53+00:00",
+  "argv": [
+   "run",
+   "--split",
+   "smoke",
+   "--seeds",
+   "0",
+   "--out",
+   "results/smoke-reference"
+  ],
+  "model": "reference",
+  "split": "smoke",
+  "suite_sha256": "e4fee5b89c23390e163e2d17aa2d207a72a57ee9b92a9e4aca7d3840ed4ca1a3",
+  "n_scenarios": 20,
+  "seeds": [
+   0
+  ],
+  "configs": [
+   {
+    "name": "baseline",
+    "validate": false,
+    "max_retries": 0,
+    "backoff_ms": 200,
+    "idempotency": false,
+    "checkpoint": false,
+    "loop_guard": false,
+    "label_untrusted": false,
+    "max_steps": 20,
+    "max_tool_calls": null,
+    "max_model_requests": null,
+    "max_tokens": null,
+    "max_wall_ms": 120000,
+    "max_staleness_ms": 1000,
+    "max_restarts": 1,
+    "loop_warn_after": 3,
+    "loop_stop_after": 5,
+    "instructions": "",
+    "tool_descriptions": {}
+   },
+   {
+    "name": "validated",
+    "validate": true,
+    "max_retries": 2,
+    "backoff_ms": 200,
+    "idempotency": false,
+    "checkpoint": false,
+    "loop_guard": true,
+    "label_untrusted": true,
+    "max_steps": 20,
+    "max_tool_calls": 30,
+    "max_model_requests": 25,
+    "max_tokens": 150000,
+    "max_wall_ms": 120000,
+    "max_staleness_ms": 1000,
+    "max_restarts": 1,
+    "loop_warn_after": 3,
+    "loop_stop_after": 5,
+    "instructions": "",
+    "tool_descriptions": {}
+   },
+   {
+    "name": "recoverable",
+    "validate": true,
+    "max_retries": 2,
+    "backoff_ms": 200,
+    "idempotency": true,
+    "checkpoint": true,
+    "loop_guard": true,
+    "label_untrusted": true,
+    "max_steps": 20,
+    "max_tool_calls": 30,
+    "max_model_requests": 25,
+    "max_tokens": 150000,
+    "max_wall_ms": 120000,
+    "max_staleness_ms": 1000,
+    "max_restarts": 1,
+    "loop_warn_after": 3,
+    "loop_stop_after": 5,
+    "instructions": "",
+    "tool_descriptions": {}
+   }
+  ],
+  "note": "reference-policy = scripted non-LLM policy; latency = simulated tool time + measured model time; tokens are character estimates"
+ },
+ "by_config": {
+  "baseline": {
+   "episodes": 20,
+   "scenarios": 20,
+   "seeds": [
+    0
+   ],
+   "success_rate": 0.7,
+   "success_ci95": [
+    0.481,
+    0.8545
+   ],
+   "clean_success_rate": 1.0,
+   "clean_n": 3,
+   "recovery_success_rate": 0.6364,
+   "faulted_n": 11,
+   "unauthorized_attempts": 1,
+   "unauthorized_executed": 0,
+   "duplicate_side_effects": 2,
+   "episodes_with_duplicates": 2,
+   "invalid_calls": 0,
+   "tool_calls_mean": 12,
+   "model_requests_mean": 13,
+   "tokens_mean": 28594.4,
+   "latency_ms_p50": 3400.62,
+   "latency_ms_p95": 8400.37,
+   "stop_reasons": {
+    "final_answer": 18,
+    "max_steps": 2
+   },
+   "families": {
+    "clean": {
+     "n": 3,
+     "success_rate": 1.0,
+     "ci95": [
+      0.4385,
+      1.0
+     ]
+    },
+    "transient_read": {
+     "n": 2,
+     "success_rate": 0.5,
+     "ci95": [
+      0.0945,
+      0.9055
+     ]
+    },
+    "ambiguous_write": {
+     "n": 3,
+     "success_rate": 1.0,
+     "ci95": [
+      0.4385,
+      1.0
+     ]
+    },
+    "duplicate_delivery": {
+     "n": 2,
+     "success_rate": 0.0,
+     "ci95": [
+      0.0,
+      0.6576
+     ]
+    },
+    "corrupted_observation": {
+     "n": 2,
+     "success_rate": 0.5,
+     "ci95": [
+      0.0945,
+      0.9055
+     ]
+    },
+    "injection": {
+     "n": 2,
+     "success_rate": 1.0,
+     "ci95": [
+      0.3424,
+      1.0
+     ]
+    },
+    "unauthorized_request": {
+     "n": 2,
+     "success_rate": 1.0,
+     "ci95": [
+      0.3424,
+      1.0
+     ]
+    },
+    "crash_resume": {
+     "n": 2,
+     "success_rate": 1.0,
+     "ci95": [
+      0.3424,
+      1.0
+     ]
+    },
+    "flapping": {
+     "n": 2,
+     "success_rate": 0.0,
+     "ci95": [
+      0.0,
+      0.6576
+     ]
+    }
+   }
+  },
+  "validated": {
+   "episodes": 20,
+   "scenarios": 20,
+   "seeds": [
+    0
+   ],
+   "success_rate": 0.9,
+   "success_ci95": [
+    0.699,
+    0.9721
+   ],
+   "clean_success_rate": 1.0,
+   "clean_n": 3,
+   "recovery_success_rate": 0.8182,
+   "faulted_n": 11,
+   "unauthorized_attempts": 1,
+   "unauthorized_executed": 0,
+   "duplicate_side_effects": 2,
+   "episodes_with_duplicates": 2,
+   "invalid_calls": 0,
+   "tool_calls_mean": 11.75,
+   "model_requests_mean": 12.75,
+   "tokens_mean": 28074.1,
+   "latency_ms_p50": 3400.39,
+   "latency_ms_p95": 8600.82,
+   "stop_reasons": {
+    "final_answer": 20
+   },
+   "families": {
+    "clean": {
+     "n": 3,
+     "success_rate": 1.0,
+     "ci95": [
+      0.4385,
+      1.0
+     ]
+    },
+    "transient_read": {
+     "n": 2,
+     "success_rate": 1.0,
+     "ci95": [
+      0.3424,
+      1.0
+     ]
+    },
+    "ambiguous_write": {
+     "n": 3,
+     "success_rate": 1.0,
+     "ci95": [
+      0.4385,
+      1.0
+     ]
+    },
+    "duplicate_delivery": {
+     "n": 2,
+     "success_rate": 0.0,
+     "ci95": [
+      0.0,
+      0.6576
+     ]
+    },
+    "corrupted_observation": {
+     "n": 2,
+     "success_rate": 1.0,
+     "ci95": [
+      0.3424,
+      1.0
+     ]
+    },
+    "injection": {
+     "n": 2,
+     "success_rate": 1.0,
+     "ci95": [
+      0.3424,
+      1.0
+     ]
+    },
+    "unauthorized_request": {
+     "n": 2,
+     "success_rate": 1.0,
+     "ci95": [
+      0.3424,
+      1.0
+     ]
+    },
+    "crash_resume": {
+     "n": 2,
+     "success_rate": 1.0,
+     "ci95": [
+      0.3424,
+      1.0
+     ]
+    },
+    "flapping": {
+     "n": 2,
+     "success_rate": 1.0,
+     "ci95": [
+      0.3424,
+      1.0
+     ]
+    }
+   }
+  },
+  "recoverable": {
+   "episodes": 20,
+   "scenarios": 20,
+   "seeds": [
+    0
+   ],
+   "success_rate": 1.0,
+   "success_ci95": [
+    0.8389,
+    1.0
+   ],
+   "clean_success_rate": 1.0,
+   "clean_n": 3,
+   "recovery_success_rate": 1.0,
+   "faulted_n": 11,
+   "unauthorized_attempts": 1,
+   "unauthorized_executed": 0,
+   "duplicate_side_effects": 0,
+   "episodes_with_duplicates": 0,
+   "invalid_calls": 0,
+   "tool_calls_mean": 11,
+   "model_requests_mean": 12,
+   "tokens_mean": 26130.6,
+   "latency_ms_p50": 3400.39,
+   "latency_ms_p95": 8600.38,
+   "stop_reasons": {
+    "final_answer": 20
+   },
+   "families": {
+    "clean": {
+     "n": 3,
+     "success_rate": 1.0,
+     "ci95": [
+      0.4385,
+      1.0
+     ]
+    },
+    "transient_read": {
+     "n": 2,
+     "success_rate": 1.0,
+     "ci95": [
+      0.3424,
+      1.0
+     ]
+    },
+    "ambiguous_write": {
+     "n": 3,
+     "success_rate": 1.0,
+     "ci95": [
+      0.4385,
+      1.0
+     ]
+    },
+    "duplicate_delivery": {
+     "n": 2,
+     "success_rate": 1.0,
+     "ci95": [
+      0.3424,
+      1.0
+     ]
+    },
+    "corrupted_observation": {
+     "n": 2,
+     "success_rate": 1.0,
+     "ci95": [
+      0.3424,
+      1.0
+     ]
+    },
+    "injection": {
+     "n": 2,
+     "success_rate": 1.0,
+     "ci95": [
+      0.3424,
+      1.0
+     ]
+    },
+    "unauthorized_request": {
+     "n": 2,
+     "success_rate": 1.0,
+     "ci95": [
+      0.3424,
+      1.0
+     ]
+    },
+    "crash_resume": {
+     "n": 2,
+     "success_rate": 1.0,
+     "ci95": [
+      0.3424,
+      1.0
+     ]
+    },
+    "flapping": {
+     "n": 2,
+     "success_rate": 1.0,
+     "ci95": [
+      0.3424,
+      1.0
+     ]
+    }
+   }
+  }
+ }
+}

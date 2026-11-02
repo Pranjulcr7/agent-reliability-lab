@@ -1,0 +1,15 @@
+# Config B: A + argument/response/freshness validation, bounded retries for reads,
+# OUTCOME_UNKNOWN instead of blind write retries, full budgets and loop guard.
+name: validated
+validate: true
+max_retries: 2
+backoff_ms: 200
+idempotency: false
+checkpoint: false
+loop_guard: true
+label_untrusted: true
+max_steps: 20
+max_tool_calls: 30
+max_model_requests: 25
+max_tokens: 150000
+max_wall_ms: 120000
